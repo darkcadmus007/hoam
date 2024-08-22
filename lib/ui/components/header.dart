@@ -26,7 +26,7 @@ class Header extends StatelessWidget {
               'Stanford Executive Subdivision',
               style: TextStyle(
                 fontSize: 25,
-                color: primaryColor,
+                color: Colors.yellow,
                 fontWeight: FontWeight.bold,
               ),
             ),

@@ -28,18 +28,9 @@ class GuestsPage extends StatelessWidget {
    return Scaffold(
       appBar: AppBar(
         title: Text('Expected Guests'),
-        leading: Builder(
-          builder: (context) {
-            return IconButton(
-              icon: Icon(Icons.menu), // Drawer icon
-              onPressed: () {
-                Scaffold.of(context).openDrawer(); // Opens the drawer
-              },
-            );
-          },
-        ),
+     
       ),
-      drawer: NavigationDrawerWidget(),
+
       body: SafeArea(
         child: Column(
           children: [

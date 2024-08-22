@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 ///Build your own colors here!
 
-const Color primaryColor = Color(0xffFFD700);
+const Color primaryColor = Color.fromARGB(255, 27, 0, 122);
 const Color secondaryColor = Color(0xff4169E1);
 Color get shadowColor => Colors.black.withOpacity(.05);
 

@@ -34,7 +34,7 @@ class MenuGridSecurity extends StatelessWidget {
       'icon': 'https://cdn-icons-png.flaticon.com/128/11608/11608210.png',
       'text': 'Tenants',
       'page': TenantsPage()
-    },   
+    },
   ];
 
   @override
@@ -54,6 +54,7 @@ class MenuGridSecurity extends StatelessWidget {
             startScreen(context, menuItems[index]['page']);
           },
           child: Card(
+            elevation: 5.0,
             child: Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(

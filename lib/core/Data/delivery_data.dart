@@ -3,7 +3,7 @@ import '../models/delivery_model.dart';
 class DeliveryService {
   Future<List<DeliveryModel>> getSampleDeliveries() async {
     // Simulate network delay
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
 
     // Sample data
     List<Map<String, dynamic>> sampleData = [

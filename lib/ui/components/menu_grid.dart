@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hoam_v1/core/utils/utils.dart';
 import 'package:hoam_v1/ui/pages/deliveries.dart';
+import 'package:hoam_v1/ui/pages/hoa_rules_page.dart';
+import 'package:hoam_v1/ui/pages/member_profile_page.dart';
+import 'package:hoam_v1/ui/pages/reminders_page.dart';
 import 'package:hoam_v1/ui/pages/security_home_page.dart';
 
 import '../../core/utils/navigations.dart';
@@ -36,17 +39,17 @@ class MenuGrid extends StatelessWidget {
     {
       'icon': 'https://cdn-icons-png.flaticon.com/128/4285/4285662.png',
       'text': 'Reminders',
-      'page': DeliveriesPage()
+      'page': RemindersPage()
     },
     {
       'icon': 'https://cdn-icons-png.flaticon.com/128/2534/2534888.png',
       'text': 'HOA Rules',
-      'page': DeliveriesPage()
+      'page': HOARulesPage()
     },
     {
       'icon': 'https://cdn-icons-png.flaticon.com/128/5415/5415273.png',
       'text': 'Registry',
-      'page': DeliveriesPage()
+      'page': HOAProfileScreen()
     },
   ];
 
@@ -67,6 +70,7 @@ class MenuGrid extends StatelessWidget {
             startScreen(context, menuItems[index]['page']);
           },
           child: Card(
+            elevation: 5.0,
             child: Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(

@@ -12,7 +12,10 @@ class SecurityHomePage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Header(),
+          Padding(
+              padding: const EdgeInsets.only(top: 25, left:10, right:10),
+              child: Header(),
+            ),
             Expanded(child: MenuGridSecurity()),
           ],
         ),

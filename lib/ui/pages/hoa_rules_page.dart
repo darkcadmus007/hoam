@@ -1,36 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:hoam_v1/core/Data/delivery_data.dart';
-import 'package:hoam_v1/core/Data/guests_data.dart';
-import 'package:hoam_v1/core/Data/helper_pass_data.dart';
-import 'package:hoam_v1/core/Data/tenant_data.dart';
-import 'package:hoam_v1/core/https/delivery_http.dart';
-import 'package:hoam_v1/core/models/car_model.dart';
-import 'package:hoam_v1/core/models/delivery_model.dart';
-import 'package:hoam_v1/core/models/guests_model.dart';
-import 'package:hoam_v1/core/models/tenant_model.dart';
-import 'package:hoam_v1/core/utils/utils.dart';
+import 'package:hoam_v1/core/Data/questions_data.dart';
 
-import '../../core/Data/car_data.dart';
-import '../../core/models/helper_pass_model.dart';
+import 'package:hoam_v1/core/Data/tenant_data.dart';
+import 'package:hoam_v1/core/models/questions_model.dart';
+
+import 'package:hoam_v1/core/models/tenant_model.dart';
+
+import '../../core/resources/colors.dart';
 import '../../core/resources/styles.dart';
 import '../../core/resources/themes.dart';
 import '../components/MenuItems/Loader/card_loader_item_two.dart';
 import '../components/MenuItems/card_item_one.dart';
-import '../components/MenuItems/card_item_two.dart';
 import '../components/custom_divider.dart';
 import '../components/custom_shimmer.dart';
-import '../components/drawer.dart';
-import '../components/header.dart';
 import '../components/paginate_list.dart';
 
-class TenantsPage extends StatelessWidget {
-  const TenantsPage({super.key});
+class HOARulesPage extends StatelessWidget {
+  const HOARulesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tenants'),
+        title: Text('HOA Rules'),
       ),
       body: SafeArea(
         child: Column(
@@ -41,7 +33,7 @@ class TenantsPage extends StatelessWidget {
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.search,
                 decoration: primaryInputDecoration(context).copyWith(
-                  hintText: 'Search Name',
+                  hintText: 'Search for Questions',
                   fillColor: theme(context).cardColor,
                 ),
                 // onSubmitted: (value) => GlobalNotifier.read(context).notify(),
@@ -51,7 +43,7 @@ class TenantsPage extends StatelessWidget {
             Expanded(
                 child: ListViewPagination(
               listPadding: const EdgeInsets.symmetric(horizontal: 1),
-              loader: (page) => TenantService().getSampleTenants(),
+              loader: (page) => QuestionService().getSampleQuestions(),
               preloadBuilder: (context, index) =>
                   CardItemLoaderItemTwo(context),
               builder: _listItem,
@@ -62,17 +54,52 @@ class TenantsPage extends StatelessWidget {
     );
   }
 
-  Widget _listItem(BuildContext context, int index, TenantModel item) {
+  Widget _listItem(BuildContext context, int index, QuestionModel item) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5.0),
-      child: ItemCardOne(
-        imageUrl: item.photoImg,
-        title: item.name,
-        subtitle: item.mobile,
-        headerTxt: item.status,
+      child: Card(
+        elevation: 2.0,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+        child: ExpansionTile(
+          title: Text(item.question!,
+              style: textTheme(context)
+                  .titleSmall!
+                  .copyWith(color: primaryTextColor)),
+          children: [
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
+              child: Text(item.answer!),
+            ),
+          ],
+        ),
       ),
     );
   }
+
+  // Card(
+  //     elevation: 2.0,
+  //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+  //     child: Row(
+  //       children: [
+  //         Image.network(imageUrl, width: 100, height: 100, fit: BoxFit.cover),
+  //         Padding(
+  //           padding: const EdgeInsets.all(8.0),
+  //           child: Column(
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [
+  //               Text(headerTxt,  style: textTheme(context).bodyLarge!.copyWith(color: secondaryTextColor),),
+  //               SizedBox(height: 8.0),
+  //               Text(title,
+  //                  style: textTheme(context).labelLarge!.copyWith(color: primaryTextColor)),
+  //               Text(subtitle, style: textTheme(context).labelLarge!.copyWith(color: primaryTextColor)),
+  //             ],
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   )
 
   // Widget _listItem(BuildContext context, int index, TenantModel item) {
   //   return Padding(

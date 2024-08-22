@@ -27,18 +27,7 @@ class HelperPassPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Helpers Pass'),
-        leading: Builder(
-          builder: (context) {
-            return IconButton(
-              icon: Icon(Icons.menu), // Drawer icon
-              onPressed: () {
-                Scaffold.of(context).openDrawer(); // Opens the drawer
-              },
-            );
-          },
-        ),
       ),
-      drawer: NavigationDrawerWidget(),
       body: SafeArea(
         child: Column(
           children: [
@@ -69,85 +58,85 @@ class HelperPassPage extends StatelessWidget {
     );
   }
 
-  Widget _listItem(BuildContext context, int index, HelperPassModel item) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5.0),
-      child: ItemCardOne(
-          imageUrl: item.photoImg,
-          headerTxt: item.status,
-          title: item.name,
-          subtitle: item.gender),
-    );
-  }
+  // Widget _listItem(BuildContext context, int index, HelperPassModel item) {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(horizontal: 5.0),
+  //     child: ItemCardOne(
+  //         imageUrl: item.photoImg,
+  //         headerTxt: item.status,
+  //         title: item.name,
+  //         subtitle: item.gender),
+  //   );
+  // }
 
-//  Widget _listItem(BuildContext context, int index, HelperPassModel item) {
-//     final List<HelperPassModel> helpers;
-//     return Padding(
-//           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-//           child: Container(
-//             padding: EdgeInsets.all(16.0),
-//             decoration: BoxDecoration(
-//               color: Colors.white,
-//               borderRadius: BorderRadius.circular(12.0),
-//               boxShadow: [
-//                 BoxShadow(
-//                   color: Colors.grey.withOpacity(0.3),
-//                   spreadRadius: 2,
-//                   blurRadius: 5,
-//                   offset: Offset(0, 3),
-//                 ),
-//               ],
-//             ),
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 Row(
-//                   children: [
-//                     Text(
-//                       'Helper ${index + 1}',
-//                       style: TextStyle(
-//                         fontWeight: FontWeight.bold,
-//                         fontSize: 16.0,
-//                         color: Colors.orange,
-//                       ),
-//                     ),
-//                     Spacer(),
-//                     Text(
-//                       'ID: [ 1 ]',
-//                       style: TextStyle(
-//                         fontWeight: FontWeight.bold,
-//                         fontSize: 14.0,
-//                         color: Colors.orange,
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//                 SizedBox(height: 8.0),
-//                 Row(
-//                   children: [
-//                     _buildLabelValue('Name:', item.name, Colors.blue),
-//                   ],
-//                 ),
-//                 Row(
-//                   children: [
-//                     _buildGenderOption(item.gender),
-//                   ],
-//                 ),
-//                 SizedBox(height: 8.0),
-//                 Row(
-//                   children: [
-//                     _buildPhoto(item.photoImg+index.toString()),
-//                   ],
-//                 ),
-//                 SizedBox(height: 8.0),
-//                 _buildLabelValue('Special Instructions:', item.specialInstruction, Colors.green),
-//                 _buildLeaveWithBagOption(item.hasBag),
-//                 _buildStatus(item.status),
-//               ],
-//             ),
-//           ),
-//         );
-//   }
+ Widget _listItem(BuildContext context, int index, HelperPassModel item) {
+    final List<HelperPassModel> helpers;
+    return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+          child: Container(
+            padding: EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.3),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      'Helper ${index + 1}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                        color: Colors.orange,
+                      ),
+                    ),
+                    Spacer(),
+                    Text(
+                      'ID: [ 1 ]',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14.0,
+                        color: Colors.orange,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 8.0),
+                Row(
+                  children: [
+                    _buildLabelValue('Name:', item.name, Colors.blue),
+                  ],
+                ),
+                Row(
+                  children: [
+                    _buildGenderOption(item.gender),
+                  ],
+                ),
+                SizedBox(height: 8.0),
+                Row(
+                  children: [
+                    _buildPhoto(item.photoImg),
+                  ],
+                ),
+                SizedBox(height: 8.0),
+                _buildLabelValue('Special Instructions:', item.specialInstruction, Colors.green),
+                _buildLeaveWithBagOption(item.hasBag),
+                _buildStatus(item.status),
+              ],
+            ),
+          ),
+        );
+  }
 
   Widget _buildLabelValue(String label, String value, Color color) {
     return Padding(

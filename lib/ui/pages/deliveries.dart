@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hoam_v1/core/Data/delivery_data.dart';
 import 'package:hoam_v1/core/Data/guests_data.dart';
 import 'package:hoam_v1/core/Data/helper_pass_data.dart';
@@ -14,6 +15,7 @@ import '../../core/models/helper_pass_model.dart';
 import '../../core/resources/styles.dart';
 import '../../core/resources/themes.dart';
 import '../components/MenuItems/card_item_two.dart';
+import '../components/Widgets/lavel_value_widget.dart';
 import '../components/custom_divider.dart';
 import '../components/custom_shimmer.dart';
 import '../components/drawer.dart';
@@ -28,18 +30,7 @@ class DeliveriesPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Deliveries'),
-        leading: Builder(
-          builder: (context) {
-            return IconButton(
-              icon: Icon(Icons.menu), // Drawer icon
-              onPressed: () {
-                Scaffold.of(context).openDrawer(); // Opens the drawer
-              },
-            );
-          },
-        ),
       ),
-      drawer: NavigationDrawerWidget(),
       body: SafeArea(
         child: Column(
           children: [
@@ -60,7 +51,8 @@ class DeliveriesPage extends StatelessWidget {
                 child: ListViewPagination(
               listPadding: const EdgeInsets.symmetric(horizontal: 1),
               loader: (page) => DeliveryService().getSampleDeliveries(),
-              preloadBuilder: (context, index) => CardItemLoaderItemTwo(context),
+              preloadBuilder: (context, index) =>
+                  CardItemLoaderItemTwo(context),
               builder: _listItem,
             )),
           ],
@@ -69,64 +61,65 @@ class DeliveriesPage extends StatelessWidget {
     );
   }
 
-  Widget _listItem(BuildContext context, int index, DeliveryModel item) {
-
-    return Padding(
-      padding: const EdgeInsets.symmetric( horizontal: 5.0),
-      child: ItemCardTwo(key1: 'From',val1: item.title,key2: 'Name',val2:'Joana Doe' , key3: 'Type', val3: item.type, key4: 'Date & Time' , val4: convertDate(item.date)),
-    );
-  }
-
-
   // Widget _listItem(BuildContext context, int index, DeliveryModel item) {
   //   return Padding(
-  //     padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 16.0),
-  //     child: Container(
-  //       padding: EdgeInsets.all(16.0),
-  //       decoration: BoxDecoration(
-  //         color: Colors.white,
-  //         borderRadius: BorderRadius.circular(12.0),
-  //         boxShadow: [
-  //           BoxShadow(
-  //             color: Colors.grey.withOpacity(0.3),
-  //             spreadRadius: 2,
-  //             blurRadius: 5,
-  //             offset: Offset(0, 3),
-  //           ),
-  //         ],
-  //       ),
-  //       child: Column(
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           Row(
-  //             children: [
-  //               _buildLabelValue('Source:', item.title, Colors.blue),
-  //             ],
-  //           ),
-  //           SizedBox(height: 4.0),
-  //           Row(
-  //             children: [
-  //               _buildLabelValue('Name:', 'Joana Doe', Colors.blue),
-  //             ],
-  //           ),
-  //           SizedBox(height: 4.0),
-  //           Row(
-  //             children: [
-  //               _buildLabelValue('Type:', item.type, Colors.blue),
-  //             ],
-  //           ),
-  //           SizedBox(height: 4.0),
-  //           Row(
-  //             children: [
-  //               _buildLabelValue(
-  //                   'Date and Time:', convertDate(item.date), Colors.blue),
-  //             ],
-  //           ),
-  //         ],
-  //       ),
-  //     ),
+  //     padding: const EdgeInsets.symmetric(horizontal: 5.0),
+  //     child: ItemCardTwo(
+  //         key1: 'From',
+  //         val1: item.title,
+  //         key2: 'Name',
+  //         val2: 'Joana Doe',
+  //         key3: 'Type',
+  //         val3: item.type,
+  //         key4: 'Date & Time',
+  //         val4: convertDate(item.date)),
   //   );
   // }
+
+  Widget _listItem(BuildContext context, int index, DeliveryModel item) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 16.0),
+      child: Container(
+        padding: EdgeInsets.all(16.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.3),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 3),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            LabelValueWidget(
+              label: 'From: ',
+              value: item.title,
+            ),
+            const Gap(5),
+            LabelValueWidget(
+              label: 'Name: ',
+              value: 'Joana Doe',
+            ),
+              const Gap(5),
+            LabelValueWidget(
+              label: 'Type: ',
+              value: item.type,
+            ),
+              const Gap(5),
+            LabelValueWidget(
+              label: 'Date and Time: ',
+              value: convertDate(item.date),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   Widget _buildLabelValue(String label, String value, Color color) {
     return Padding(

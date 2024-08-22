@@ -6,6 +6,7 @@ import 'package:hoam_v1/core/https/delivery_http.dart';
 import 'package:hoam_v1/core/models/car_model.dart';
 import 'package:hoam_v1/core/models/delivery_model.dart';
 import 'package:hoam_v1/core/models/guests_model.dart';
+import 'package:hoam_v1/core/resources/colors.dart';
 import 'package:hoam_v1/core/utils/utils.dart';
 
 import '../../core/Data/car_data.dart';
@@ -14,6 +15,7 @@ import '../../core/resources/styles.dart';
 import '../../core/resources/themes.dart';
 import '../components/MenuItems/Loader/card_loader_item_one.dart';
 import '../components/MenuItems/card_item_one.dart';
+import '../components/Widgets/lavel_value_widget.dart';
 import '../components/custom_divider.dart';
 import '../components/custom_shimmer.dart';
 import '../components/drawer.dart';
@@ -26,24 +28,13 @@ class CarsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
+      appBar: AppBar(
         title: Text('Cars'),
-        leading: Builder(
-          builder: (context) {
-            return IconButton(
-              icon: Icon(Icons.menu), // Drawer icon
-              onPressed: () {
-                Scaffold.of(context).openDrawer(); // Opens the drawer
-              },
-            );
-          },
-        ),
       ),
-      drawer: NavigationDrawerWidget(),
       body: SafeArea(
         child: Column(
           children: [
-             Padding(
+            Padding(
               padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               child: TextField(
                 keyboardType: TextInputType.text,
@@ -60,7 +51,8 @@ class CarsPage extends StatelessWidget {
                 child: ListViewPagination(
               listPadding: const EdgeInsets.symmetric(horizontal: 1),
               loader: (page) => CarService().getSampleCars(),
-              preloadBuilder: (context, index) => CardItemLoaderItemOne(context),
+              preloadBuilder: (context, index) =>
+                  CardItemLoaderItemOne(context),
               builder: _listItem,
             )),
           ],
@@ -70,38 +62,54 @@ class CarsPage extends StatelessWidget {
   }
 
   Widget _listItem(BuildContext context, int index, CarModel item) {
-
     return Padding(
-      padding: const EdgeInsets.symmetric( horizontal: 5.0),
-      child: ItemCardOne(imageUrl: item.photo, headerTxt: item.status, title: item.model, subtitle: item.plateNumber),
-    );
-  }
-
-  Widget _buildLabelValue(String label, String value, Color color) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 8.0),
-      child: RichText(
-        text: TextSpan(
-          text: '$label ',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 14.0,
-            color: Colors.grey[800],
-          ),
-          children: [
-            TextSpan(
-              text: value,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 14.0,
-                color: color,
+      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+      child: Card(
+        elevation: 2.0,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Car ${index +1}',
+                style: TextStyle(
+                  color: secondaryColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                ),
               ),
-            ),
-          ],
+              SizedBox(height: 4.0),
+              LabelValueWidget(label: 'Plate Number: ', value: item.plateNumber,),
+             LabelValueWidget(label: 'Color: ', value: item.color,),
+             LabelValueWidget(label: 'Model: ', value: item.model,),
+              SizedBox(height: 8.0),
+              Image.network(
+                item.photo,
+                height: 100.0,
+                fit: BoxFit.cover,
+              ),
+              SizedBox(height: 8.0),
+              LabelValueWidget(label: 'Sticker: ', value: item.sticker,),
+             _buildStatus(item.status, context)
+            ],
+          ),
         ),
       ),
     );
   }
+
+  // Widget _listItem(BuildContext context, int index, CarModel item) {
+
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric( horizontal: 5.0),
+  //     child: ItemCardOne(imageUrl: item.photo, headerTxt: item.status, title: item.model, subtitle: item.plateNumber),
+  //   );
+  // }
+
+
 
   Widget _buildGenderOption(String gender) {
     return Row(
@@ -169,15 +177,16 @@ class CarsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildStatus(String status) {
+  Widget _buildStatus(String status, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 4.0),
       child: Row(
         children: [
           Text(
             'Status:',
-            style:
-                TextStyle(fontWeight: FontWeight.bold, color: Colors.grey[800]),
+           style: textTheme(context)
+                  .labelLarge!
+                  .copyWith(color: primaryTextColor),
           ),
           SizedBox(width: 8.0),
           Text(
@@ -191,6 +200,4 @@ class CarsPage extends StatelessWidget {
       ),
     );
   }
-
- 
 }

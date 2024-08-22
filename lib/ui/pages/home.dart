@@ -7,12 +7,18 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+
       body: SafeArea(
         child: Column(
           children: [
-            Header(),
-            ImageCarousel(),
+            Padding(
+              padding: const EdgeInsets.only(top: 25, left:10, right:10),
+              child: Header(),
+            ),
+            Padding(
+            padding: const EdgeInsets.only(top: 20),
+              child: ImageCarousel(),
+            ),
             Expanded(child: MenuGrid()),
           ],
         ),

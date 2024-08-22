@@ -3,7 +3,7 @@ import '../models/helper_pass_model.dart';
 class HelperPassService {
   Future<List<HelperPassModel>> getSampleHelperPasses() async {
     // Simulate network delay
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
 
     // Sample data
     List<Map<String, dynamic>> sampleData = [
