@@ -36,7 +36,8 @@ class _RemindersPageState extends State<RemindersPage> {
                 ),
                 // onSubmitted: (value) => GlobalNotifier.read(context).notify(),
               ),
-            ),            
+            ),     
+                   
             SizedBox(height: 10),
             Expanded(
                 child: ListViewPagination(
