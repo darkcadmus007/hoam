@@ -45,7 +45,8 @@ BoxDecoration primaryTabDecoration(BuildContext context) => BoxDecoration(
       color: primaryColor,
     );
 
-InputDecoration primaryInputDecoration(BuildContext context) => InputDecoration(
+InputDecoration primaryInputDecoration(BuildContext context, Widget? prefixIcon) => InputDecoration(
+    prefixIcon: prefixIcon,
       fillColor: theme(context).canvasColor,
       contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       filled: true,
@@ -54,7 +55,7 @@ InputDecoration primaryInputDecoration(BuildContext context) => InputDecoration(
       errorStyle: textTheme(context).bodyMedium!.copyWith(color: Colors.red),
       counterStyle: textTheme(context).bodyMedium,
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(15),
         borderSide: BorderSide(strokeAlign: 1.0),
       ),
     );

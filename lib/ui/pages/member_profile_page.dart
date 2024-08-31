@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hoam_v1/core/resources/colors.dart';
 
+import '../components/appbar_widget.dart';
+
 class HOAProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Member`s Profile'),
+      appBar: AppbarWidget(
+        title: 'Member`s Profile',
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
@@ -63,7 +65,7 @@ class HOAProfileScreen extends StatelessWidget {
         _buildTextRow('Email', 'joanadoe@gmail.com'),
         _buildTextRow('Contact Number', '+1234567890'),
         SizedBox(height: 10),
-        _buildImageRow('HOA Image',
+        _buildImageRow('User',
             'https://t4.ftcdn.net/jpg/03/83/25/83/360_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.jpg'),
       ],
     );

@@ -1,0 +1,1 @@
+const String defaultUserImage = 'https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg';

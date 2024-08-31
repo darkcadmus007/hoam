@@ -8,7 +8,7 @@ class ImageCarousel extends StatefulWidget {
 
 class _ImageCarouselState extends State<ImageCarousel> {
   final List<String> imagePaths = [
-    'assets/images/img1.jpg',
+    'assets/images/banner-1.jpg',
     'assets/images/img2.png',
     'assets/images/img3.png',
   ];

@@ -11,8 +11,8 @@ class Header extends StatelessWidget {
         height: 100,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(
-                'https://www.shutterstock.com/image-photo/background-blue-canvas-260nw-400937191.jpg'), // Update with your background image
+            image: AssetImage(
+                'assets/images/banner-bg.png'), // Update with your background image
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.all(
@@ -26,7 +26,7 @@ class Header extends StatelessWidget {
               'Stanford Executive Subdivision',
               style: TextStyle(
                 fontSize: 25,
-                color: Colors.yellow,
+                color: primaryColor,
                 fontWeight: FontWeight.bold,
               ),
             ),

@@ -8,15 +8,18 @@ import 'package:hoam_v1/core/models/guests_model.dart';
 import 'package:hoam_v1/core/utils/utils.dart';
 
 import '../../core/models/helper_pass_model.dart';
+import '../../core/resources/colors.dart';
 import '../../core/resources/styles.dart';
 import '../../core/resources/themes.dart';
 import '../components/MenuItems/Loader/card_loader_item_one.dart';
 import '../components/MenuItems/Loader/card_loader_item_two.dart';
 import '../components/MenuItems/card_item_one.dart';
+import '../components/appbar_widget.dart';
 import '../components/custom_divider.dart';
 import '../components/custom_shimmer.dart';
 import '../components/drawer.dart';
 import '../components/header.dart';
+import '../components/header_two.dart';
 import '../components/paginate_list.dart';
 
 class HelperPassPage extends StatelessWidget {
@@ -25,18 +28,19 @@ class HelperPassPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Helpers Pass'),
+      appBar: AppbarWidget(
+        title: 'Helper`s Pass',
       ),
       body: SafeArea(
         child: Column(
           children: [
+              HeaderTwo(),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
               child: TextField(
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.search,
-                decoration: primaryInputDecoration(context).copyWith(
+                decoration: primaryInputDecoration(context,Icon(Icons.search, color: greyColor,)).copyWith(
                   hintText: 'Search Name',
                   fillColor: theme(context).cardColor,
                 ),

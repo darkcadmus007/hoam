@@ -10,14 +10,17 @@ import 'package:hoam_v1/core/utils/utils.dart';
 
 import '../../core/Data/car_data.dart';
 import '../../core/models/helper_pass_model.dart';
+import '../../core/resources/colors.dart';
 import '../../core/resources/styles.dart';
 import '../../core/resources/themes.dart';
 import '../components/MenuItems/Loader/card_loader_item_two.dart';
 import '../components/MenuItems/card_item_two.dart';
+import '../components/appbar_widget.dart';
 import '../components/custom_divider.dart';
 import '../components/custom_shimmer.dart';
 import '../components/drawer.dart';
 import '../components/header.dart';
+import '../components/header_two.dart';
 import '../components/paginate_list.dart';
 
 class GuestsPage extends StatelessWidget {
@@ -25,21 +28,20 @@ class GuestsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
-      appBar: AppBar(
-        title: Text('Expected Guests'),
-     
+    return Scaffold(
+      appBar: AppbarWidget(
+        title: 'Guests',
       ),
-
       body: SafeArea(
         child: Column(
           children: [
+              HeaderTwo(),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
               child: TextField(
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.search,
-                decoration: primaryInputDecoration(context).copyWith(
+                decoration: primaryInputDecoration(context,Icon(Icons.search, color: greyColor,)).copyWith(
                   hintText: 'Search Name',
                   fillColor: theme(context).cardColor,
                 ),
@@ -51,7 +53,8 @@ class GuestsPage extends StatelessWidget {
                 child: ListViewPagination(
               listPadding: const EdgeInsets.symmetric(horizontal: 1),
               loader: (page) => GuestsService().getSampleGuests(),
-              preloadBuilder: (context, index) => CardItemLoaderItemTwo(context),
+              preloadBuilder: (context, index) =>
+                  CardItemLoaderItemTwo(context),
               builder: _listItem,
             )),
           ],
@@ -61,13 +64,19 @@ class GuestsPage extends StatelessWidget {
   }
 
   Widget _listItem(BuildContext context, int index, GuestsModel item) {
-
     return Padding(
-      padding: const EdgeInsets.symmetric( horizontal: 5.0),
-      child: ItemCardTwo(key1: 'Name',val1: item.name,key2: 'Car Plate Number',val2:item.carPlateNo , key3: 'Date & Time', val3: convertDate(item.date), key4: 'Status' , val4: item.status),
+      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+      child: ItemCardTwo(
+          key1: 'Name',
+          val1: item.name,
+          key2: 'Car Plate Number',
+          val2: item.carPlateNo,
+          key3: 'Date & Time',
+          val3: convertDate(item.date),
+          key4: 'Status',
+          val4: item.status),
     );
   }
-
 
   // Widget _listItem(BuildContext context, int index, GuestsModel item) {
   //   return Padding(

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hoam_v1/core/resources/themes.dart';
 import 'package:hoam_v1/core/utils/utils.dart';
 import 'package:hoam_v1/ui/pages/home.dart';
 
 import '../../core/resources/colors.dart';
 import '../../core/resources/styles.dart';
+import 'forgot_password_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -30,20 +32,24 @@ class _LoginPageState extends State<LoginPage> {
                   'assets/images/hoam-logo.png', // Replace with your logo asset path
                   height: 200,
                 ),
-                SizedBox(height: 12),
+                Gap(10),
 
                 // Login Text
-                 Text(
-                  'Login',
-                  style: textTheme(context).displaySmall!.copyWith(color: primaryTextColor),
+                Text(
+                  'Homeowners',
+                  style: textTheme(context)
+                      .displaySmall!
+                      .copyWith(color: primaryColor),
                 ),
 
-                SizedBox(height: 10),
+                Gap(5),
 
                 // Subtitle
                 Text(
-                  'Please login to continue using the app',
-                  style: textTheme(context).titleLarge!.copyWith(color: primaryTextColor),
+                  'Association App',
+                  style: textTheme(context)
+                      .titleLarge!
+                      .copyWith(color: primaryTextColor),
                 ),
 
                 SizedBox(height: 30),
@@ -52,18 +58,19 @@ class _LoginPageState extends State<LoginPage> {
                 TextField(
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
-                  decoration: primaryInputDecoration(context).copyWith(
+                  decoration: primaryInputDecoration(context, Icon(Icons.email, color: greyColor,)).copyWith(
                     hintText: "Email",
                   ),
                 ),
 
-                SizedBox(height: 20),
+                Gap(15),
 
                 // Password TextField
                 TextField(
+                
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
-                  decoration: primaryInputDecoration(context).copyWith(
+                  decoration: primaryInputDecoration(context, Icon(Icons.lock, color: greyColor,)).copyWith(
                     hintText: "Password",
                   ),
                 ),
@@ -75,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      // Add forgot password functionality here
+                      startScreen(context, ForgotPassword());
                     },
                     child: Text('Forgot Password'),
                   ),
@@ -131,12 +138,6 @@ class _LoginPageState extends State<LoginPage> {
                       icon: Icon(Icons.apple),
                       onPressed: () {
                         // Add Twitter login functionality here
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.apple),
-                      onPressed: () {
-                        // Add LinkedIn login functionality here
                       },
                     ),
                   ],

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:hoam_v1/core/Data/reminders_data.dart';
 import 'package:hoam_v1/core/models/reminder_model.dart';
 
+import '../../core/resources/colors.dart';
 import '../../core/resources/styles.dart';
 import '../../core/resources/themes.dart';
 import '../components/MenuItems/Loader/card_loader_item_one.dart';
 import '../components/MenuItems/Loader/card_loader_item_two.dart';
+import '../components/appbar_widget.dart';
 import '../components/paginate_list.dart';
 
 class RemindersPage extends StatefulWidget {
@@ -19,18 +21,18 @@ class _RemindersPageState extends State<RemindersPage> {
   @override
   Widget build(BuildContext context) {
    return Scaffold(
-      appBar: AppBar(
-        title: Text('Reminders'),
+  appBar: AppbarWidget(
+        title: 'Reminders',
       ),
       body: SafeArea(
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
               child: TextField(
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.search,
-                decoration: primaryInputDecoration(context).copyWith(
+                decoration: primaryInputDecoration(context,Icon(Icons.search, color: greyColor,)).copyWith(
                   hintText: 'Search for Reminder',
                   fillColor: theme(context).cardColor,
                 ),
@@ -39,7 +41,7 @@ class _RemindersPageState extends State<RemindersPage> {
             ),     
 
                    
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Expanded(
                 child: ListViewPagination(
               listPadding: const EdgeInsets.symmetric(horizontal: 1),

@@ -11,8 +11,10 @@ import '../../core/resources/styles.dart';
 import '../../core/resources/themes.dart';
 import '../components/MenuItems/Loader/card_loader_item_two.dart';
 import '../components/MenuItems/card_item_one.dart';
+import '../components/appbar_widget.dart';
 import '../components/custom_divider.dart';
 import '../components/custom_shimmer.dart';
+import '../components/header_two.dart';
 import '../components/paginate_list.dart';
 
 class HOARulesPage extends StatelessWidget {
@@ -21,18 +23,19 @@ class HOARulesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('HOA Rules'),
+      appBar: AppbarWidget(
+        title: 'HOA Rules',
       ),
       body: SafeArea(
         child: Column(
           children: [
+              HeaderTwo(),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
               child: TextField(
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.search,
-                decoration: primaryInputDecoration(context).copyWith(
+                decoration: primaryInputDecoration(context,Icon(Icons.search, color: greyColor,)).copyWith(
                   hintText: 'Search for Questions',
                   fillColor: theme(context).cardColor,
                 ),

@@ -12,14 +12,17 @@ import 'package:hoam_v1/ui/components/MenuItems/Loader/card_loader_item_two.dart
 
 import '../../core/Data/car_data.dart';
 import '../../core/models/helper_pass_model.dart';
+import '../../core/resources/colors.dart';
 import '../../core/resources/styles.dart';
 import '../../core/resources/themes.dart';
 import '../components/MenuItems/card_item_two.dart';
 import '../components/Widgets/lavel_value_widget.dart';
+import '../components/appbar_widget.dart';
 import '../components/custom_divider.dart';
 import '../components/custom_shimmer.dart';
 import '../components/drawer.dart';
 import '../components/header.dart';
+import '../components/header_two.dart';
 import '../components/paginate_list.dart';
 
 class DeliveriesPage extends StatelessWidget {
@@ -28,18 +31,24 @@ class DeliveriesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Deliveries'),
+      appBar: AppbarWidget(
+        title: 'Deliveries',
       ),
       body: SafeArea(
         child: Column(
           children: [
+            HeaderTwo(),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
               child: TextField(
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.search,
-                decoration: primaryInputDecoration(context).copyWith(
+                decoration: primaryInputDecoration(
+                    context,
+                    Icon(
+                      Icons.search,
+                      color: greyColor,
+                    )).copyWith(
                   hintText: 'Search Name',
                   fillColor: theme(context).cardColor,
                 ),
@@ -105,12 +114,12 @@ class DeliveriesPage extends StatelessWidget {
               label: 'Name: ',
               value: 'Joana Doe',
             ),
-              const Gap(5),
+            const Gap(5),
             LabelValueWidget(
               label: 'Type: ',
               value: item.type,
             ),
-              const Gap(5),
+            const Gap(5),
             LabelValueWidget(
               label: 'Date and Time: ',
               value: convertDate(item.date),
