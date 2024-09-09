@@ -7,6 +7,7 @@ import 'package:hoam_v1/ui/pages/home.dart';
 import '../../core/resources/colors.dart';
 import '../../core/resources/styles.dart';
 import 'forgot_password_page.dart';
+import 'user_home.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -96,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                     width: 300,
                     child: TextButton(
                         onPressed: () {
-                          startScreen(context, HomePage());
+                          startScreen(context, UserHomePage());
                         },
                         style: primaryButtonStyle(context),
                         child: Text("Login"))),

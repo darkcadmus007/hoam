@@ -5,6 +5,7 @@ import 'package:hoam_v1/ui/pages/hoa_rules_page.dart';
 import 'package:hoam_v1/ui/pages/member_profile_page.dart';
 import 'package:hoam_v1/ui/pages/reminders_page.dart';
 import 'package:hoam_v1/ui/pages/security_home_page.dart';
+import 'package:hoam_v1/ui/pages/units_page.dart';
 
 import '../../core/resources/colors.dart';
 import '../../core/utils/navigations.dart';
@@ -12,6 +13,11 @@ import '../pages/guests_page.dart';
 
 class MenuGrid extends StatelessWidget {
   final List<Map<String, dynamic>> menuItems = [
+     {
+      'icon': 'security-icon.png',
+      'text': 'Units',
+      'page': UnitsPage()
+    },
     {
       'icon': 'security-icon.png',
       'text': 'Security',
