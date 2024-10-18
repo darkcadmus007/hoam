@@ -27,3 +27,14 @@ const Color secondaryTextColor = Color.fromARGB(255, 27, 0, 122);
 const Color menuGridColor = Color.fromARGB(255, 00, 42, 52);
 const Color appbarColor = Color(0xFF61a6ab);
 const Color headerBackgroundColor = Color(0xFF78bfc4);
+
+
+//Theme Color Pallette
+const Color themeColor1 = Color(0xFF213a57);
+const Color themeColor2 = Color(0xFF0b6477);
+const Color themeColor3 = Color(0xFF14919b);
+const Color themeColor4 = Color(0xFF0ad1c8);
+const Color themeColor5 = Color(0xFF45dfb1);
+const Color themeColor6 = Color(0xFF80ed99);
+
+const Color navColor =  Color.fromARGB(255, 167, 245, 255);

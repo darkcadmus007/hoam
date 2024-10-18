@@ -3,11 +3,15 @@ import 'package:hoam_v1/core/utils/utils.dart';
 import 'package:hoam_v1/ui/pages/cars_page.dart';
 import 'package:hoam_v1/ui/pages/deliveries.dart';
 import 'package:hoam_v1/ui/pages/helper_pass_page.dart';
+import 'package:hoam_v1/ui/pages/reminders_page.dart';
+import 'package:hoam_v1/ui/pages/settings_page.dart';
 import 'package:hoam_v1/ui/pages/tenants_page.dart';
+import 'package:hoam_v1/ui/screens/inbox_screen.dart';
 import 'package:hoam_v1/ui/screens/tenant_home_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/providers/bottom_navigation_provider.dart';
+import '../../core/resources/colors.dart';
 
 class UserHomePage extends StatefulWidget {
   const UserHomePage({Key? key}) : super(key: key);
@@ -20,7 +24,7 @@ class _UserHomePageState extends State<UserHomePage> {
   int currentIndex = 0;
   final List<Widget> _screens = [
     TenantHomeScreen(),
-    CarsPage(),
+    RemindersPage(),
     DeliveriesPage(),
     HelperPassPage(),
     TenantsPage(),
@@ -54,10 +58,9 @@ class _UserHomePageState extends State<UserHomePage> {
                       index: BottomNavigationProvider.watch(context).pageIndex,
                       children: const [
                         TenantHomeScreen(),
-                        CarsPage(),
-                        DeliveriesPage(),
+                        InboxScreen(),                       
                         HelperPassPage(),
-                        TenantsPage(),
+                        ProfileScreen(),
                       ],
                     ),
                   ),
@@ -82,67 +85,45 @@ class _BottomNavCustomState extends State<BottomNavCustom> {
 
   List<NavigationItem> items = [
     NavigationItem(
-      Icon(
-        Icons.home,
-        color: Color.fromRGBO(91, 55, 183, 1),
-      ),
+      'home.png',
       Text(
         'Home',
-        style: TextStyle(
-            color: Color.fromRGBO(91, 55, 183, 1), fontWeight: FontWeight.bold),
+        style: TextStyle(color: standardWhite, fontWeight: FontWeight.bold),
       ),
-      Color.fromRGBO(223, 215, 243, 1),
+      themeColor1,
     ),
-    NavigationItem(
-        Icon(Icons.list, color: Color.fromRGBO(201, 55, 157, 1)),
+     NavigationItem(
+        'chat.png',
         Text(
-          'Reminders',
-          style: TextStyle(
-              color: Color.fromRGBO(201, 55, 157, 1),
-              fontWeight: FontWeight.bold),
+          'Messages',
+          style: TextStyle(color: standardWhite, fontWeight: FontWeight.bold),
         ),
-        Color.fromRGBO(244, 211, 235, 1)),
+        themeColor4),
     NavigationItem(
-        Icon(
-          Icons.warning,
-          color: Color.fromRGBO(230, 169, 25, 1),
-        ),
+        'notification.png',
         Text(
-          'Violations',
-          style: TextStyle(
-              color: Color.fromRGBO(230, 169, 25, 1),
-              fontWeight: FontWeight.bold),
+          'Notifications',
+          style: TextStyle(color: standardWhite, fontWeight: FontWeight.bold),
         ),
-        Color.fromRGBO(251, 239, 211, 1)),
+        themeColor2),      
     NavigationItem(
-        Icon(Icons.chat, color: Color.fromRGBO(17, 148, 170, 1)),
+        'other.png',
         Text(
-          'Message',
-          style: TextStyle(
-              color: Color.fromRGBO(17, 148, 170, 1),
-              fontWeight: FontWeight.bold),
+          'More',
+          style: TextStyle(color: standardWhite, fontWeight: FontWeight.bold),
         ),
-        Color.fromRGBO(211, 235, 239, 1)),
-    NavigationItem(
-        Icon(Icons.person_outline, color: Color.fromRGBO(17, 148, 170, 1)),
-        Text(
-          'Profile',
-          style: TextStyle(
-              color: Color.fromRGBO(17, 148, 170, 1),
-              fontWeight: FontWeight.bold),
-        ),
-        Color.fromRGBO(211, 235, 239, 1))
+        themeColor5)
   ];
 
   Widget _buildItem(NavigationItem item, bool isSelected) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 250),
-      height: 50,
+      height: 45,
       width: isSelected ? 120 : 50,
       padding: isSelected ? EdgeInsets.only(left: 16, right: 16) : null,
       decoration: isSelected
           ? BoxDecoration(
-              color: item.color,
+              color: themeColor1,
               borderRadius: BorderRadius.all(Radius.circular(50)))
           : null,
       child: ListView(
@@ -151,12 +132,13 @@ class _BottomNavCustomState extends State<BottomNavCustom> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              IconTheme(
-                data: IconThemeData(
-                  size: 24,
-                  color: isSelected ? backgroundColorNav : Colors.black,
+              Center(
+                child: Image.asset(
+                  'assets/icons/${item.icon}', // Path to your PNG icon
+                  width: 24, // Set the width of the icon
+                  height: 24, // Set the height of the icon
+                  fit: BoxFit.contain, // Adjust how the image fits the box
                 ),
-                child: item.icon,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 4),
@@ -177,10 +159,12 @@ class _BottomNavCustomState extends State<BottomNavCustom> {
   Widget build(BuildContext context) {
     var provider = BottomNavigationProvider.watch(context);
     return Container(
-      height: 56,
-      padding: EdgeInsets.only(left: 8, top: 4, bottom: 4, right: 8),
+      height: 30,
+      padding: EdgeInsets.only(left: 8, right: 8),
       decoration: BoxDecoration(
-          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(25), topRight: Radius.circular(25)),
+          color: appbarColor,
           boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4)]),
       width: MediaQuery.of(context).size.width,
       child: Row(
@@ -203,7 +187,7 @@ class _BottomNavCustomState extends State<BottomNavCustom> {
 }
 
 class NavigationItem {
-  final Icon icon;
+  final String icon;
   final Text title;
   final Color color;
 

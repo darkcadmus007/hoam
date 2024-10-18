@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hoam_v1/core/models/units_model.dart';
 import 'package:hoam_v1/core/resources/themes.dart';
 
+import '../../core/Data/unit_data.dart';
 import '../components/header_two.dart';
 
 class TenantHomeScreen extends StatefulWidget {
@@ -33,15 +35,16 @@ class _TenantHomeScreenState extends State<TenantHomeScreen> {
     },
     // Add more events here
   ];
-
+  final items = UnitService().getSampleUnits();
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double containerHeight = screenHeight * 0.3;
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(          
+          child: Column(
             children: [
               HeaderTwo(),
               Container(
@@ -65,15 +68,29 @@ class _TenantHomeScreenState extends State<TenantHomeScreen> {
                 ),
               ),
               Gap(20),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Text(
-                    'Upcoming events',
-                    style: textTheme(context).copyWith().titleLarge,
+               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Text(
+                        'Anouncements',
+                        style: textTheme(context).copyWith().titleLarge,
+                      ),
+                    ),
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 25),
+                    child: Text('View All',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                        ),
+                        overflow: TextOverflow.ellipsis),
+                  ),
+                ],
               ),
               Gap(10),
               Padding(
@@ -137,77 +154,117 @@ class _TenantHomeScreenState extends State<TenantHomeScreen> {
                   ),
                 ),
               ),
-               Gap(20),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Text(
-                    'Anouncements',
-                    style: textTheme(context).copyWith().titleLarge,
+              Gap(20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Text(
+                        'Units',
+                        style: textTheme(context).copyWith().titleLarge,
+                      ),
+                    ),
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 25),
+                    child: Text('View All',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                        ),
+                        overflow: TextOverflow.ellipsis),
+                  ),
+                ],
               ),
               Gap(10),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Container(
                   height: 200, // Adjust height as needed
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: events.length,
-                    itemBuilder: (context, index) {
-                      final event = events[index];
-                      return Container(
-                        width: 200, // Adjust width as needed
-                        margin: EdgeInsets.only(right: 5),
-                        child: Card(
-                          elevation: 2,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              ClipRRect(
-                                borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(8)),
-                                child: Image.network(
-                                  event['image']!,
-                                  fit: BoxFit.cover,
-                                  width: double.infinity,
-                                  height: 120, // Adjust height as needed
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(
-                                      event['title']!,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
+                  child: FutureBuilder<List<UnitModel>>(
+                      future: UnitService().getSampleUnits(),
+                      builder: (context, snapshot) {
+                        // Handle loading state
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Center(child: CircularProgressIndicator());
+                        }
+
+                        // Handle error state
+                        if (snapshot.hasError) {
+                          return Center(
+                              child: Text('Error: ${snapshot.error}'));
+                        }
+
+                        // Handle data when it's available
+                        if (snapshot.hasData) {
+                          final items = snapshot.data!;
+
+                          return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: items.length,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                width: 200, // Adjust width as needed
+                                margin: EdgeInsets.only(right: 5),
+                                child: Card(
+                                  elevation: 2,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.vertical(
+                                            top: Radius.circular(8)),
+                                        child: Image.network(
+                                          items[index].houseImg!,
+                                          fit: BoxFit.cover,
+                                          width: double.infinity,
+                                          height:
+                                              120, // Adjust height as needed
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(height: 4),
-                                    Text(
-                                      event['date']!,
-                                      style: TextStyle(
-                                        color: Colors.grey,
-                                        fontSize: 14,
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                              items[index].name!,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            SizedBox(height: 4),
+                                            Text(items[index].address!,
+                                                style: TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 14,
+                                                ),
+                                                overflow:
+                                                    TextOverflow.ellipsis),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+                              );
+                            },
+                          );
+                        }
+
+                        // If no data is returned
+                        return Center(child: Text('No data found.'));
+                      }),
                 ),
               )
             ],
